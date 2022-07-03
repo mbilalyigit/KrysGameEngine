@@ -25,7 +25,7 @@ QByteArray saveGameManager::loadGame(int saveSlot)
     QString filename = QString("%1/saveSlot%2").arg(folderName).arg(saveSlot);
     QFile file(filename);
     if(!file.open(QIODevice::ReadOnly))
-        return false;
+        return retBytes;
     retBytes = file.readAll();
     file.close();
     return retBytes;
@@ -55,4 +55,13 @@ bool saveGameManager::saveGame(QByteArray gameData, int saveSlot)
     }
     file.close();
     return retval;
+}
+
+bool saveGameManager::deleteSave(int saveSlot)
+{
+    QString filename = QString("%1/saveSlot%2").arg(folderName).arg(saveSlot);
+    QFile file(filename);
+    if(file.exists())
+        return file.remove();
+    return true;
 }
