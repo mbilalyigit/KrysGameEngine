@@ -14,12 +14,16 @@ public:
     saveGameManager operator =(const saveGameManager &) = delete; // No assigning
 
     QByteArray loadGame(int saveSlot);
-    void saveGame(QByteArray gameData, int saveSlot);
-    void deleteSave(int saveSlot);
+    bool saveGame(QByteArray gameData, int saveSlot);
+    bool deleteSave(int saveSlot);
 
 protected:
     explicit saveGameManager();
     static saveGameManager *singleObj;
+
+private:
+    QString folderName = "savegames";
+    void createFolder();
 
 signals:
 
