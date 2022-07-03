@@ -5,13 +5,12 @@ saveGameManager* saveGameManager::singleObj = nullptr; // should be assigned to 
 saveGameManager *saveGameManager::getInstance()
 {
     if(singleObj == nullptr){
-        singleObj = saveGameManager();
+        singleObj = new saveGameManager();
     }
     return singleObj;
 }
 
 saveGameManager::saveGameManager()
-    : QObject{parent}
 {
 
 }
