@@ -19,6 +19,18 @@ saveGameManager::saveGameManager()
     createFolder();
 }
 
+QByteArray saveGameManager::loadGame(int saveSlot)
+{
+    QByteArray retBytes;
+    QString filename = QString("%1/saveSlot%2").arg(folderName).arg(saveSlot);
+    QFile file(filename);
+    if(!file.open(QIODevice::ReadOnly))
+        return false;
+    retBytes = file.readAll();
+    file.close();
+    return retBytes;
+}
+
 void saveGameManager::createFolder()
 {
     QDir directory(folderName);
